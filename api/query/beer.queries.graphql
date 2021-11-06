@@ -1,0 +1,10 @@
+query getBeers($skip: Int!, $sort: BeerOrder!, $filter: BeerFilter) {
+    beers(take: 20, skip: $skip, orderBy: $sort, filter: $filter) {
+        name
+        rating
+        id
+        brand
+        type
+        abv
+    }
+}
