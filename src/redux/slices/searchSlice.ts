@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { FilterField } from '../../generated/graphql';
+import { FilterField } from '../../__generated__/graphql';
 
 export interface SearchState {
     value: string;

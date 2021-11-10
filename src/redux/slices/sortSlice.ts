@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { BeerOrder, Sort } from '../../generated/graphql';
+import { BeerOrder, Sort } from '../../__generated__/graphql';
 
 export enum SortOptions {
     AlphabeticASC = 'Name: A - Z',
