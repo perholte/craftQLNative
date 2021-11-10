@@ -1,17 +1,36 @@
+import {
+	ApolloClient,
+	ApolloProvider,
+	createHttpLink,
+	InMemoryCache,
+} from '@apollo/client';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import CustomHeader from './components/header/Header';
+import BeerList from './src/components/beerlist/BeerList';
+import CustomHeader from './src/components/header/Header';
 
 export default function App() {
+	const link = createHttpLink({
+		uri: 'http://129.241.104.92:4000',
+	});
+
+	const client = new ApolloClient({
+		link,
+		cache: new InMemoryCache(),
+	});
+
 	return (
-		<SafeAreaProvider>
-			<View style={styles.container}>
-				<CustomHeader />
-				<StatusBar style='auto' />
-			</View>
-		</SafeAreaProvider>
+		<ApolloProvider client={client}>
+			<SafeAreaProvider>
+				<View style={styles.container}>
+					<CustomHeader />
+					<StatusBar style='auto' />
+					<BeerList />
+				</View>
+			</SafeAreaProvider>
+		</ApolloProvider>
 	);
 }
 
