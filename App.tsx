@@ -9,7 +9,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
-import RenderBeerItems from './src/components/beerCard/RenderBeerItems';
+import RenderBeerItems from './src/components/beerlist/RenderBeerItems';
 import CustomHeader from './src/components/header/Header';
 import { store } from './src/redux/store';
 
