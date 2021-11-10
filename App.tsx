@@ -10,6 +10,7 @@ import { StyleSheet, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import RenderBeerItems from './src/components/beerlist/RenderBeerItems';
 import CustomHeader from './src/components/header/Header';
+import { useGetBeersQuery } from './src/__generated__/graphql';
 
 export default function App() {
 	const link = createHttpLink({
@@ -18,7 +19,20 @@ export default function App() {
 
 	const client = new ApolloClient({
 		link,
-		cache: new InMemoryCache(),
+		cache: new InMemoryCache({
+			typePolicies: {
+				Query: {
+					fields: {
+						beers: {
+							keyArgs: [],
+							merge(existing = [], incoming) {
+								return [...existing, ...incoming];
+							},
+						},
+					},
+				},
+			},
+		}),
 	});
 
 	return (

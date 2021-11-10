@@ -1,16 +1,16 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { data } from './RenderBeerItems';
+import { Beer } from '../../__generated__/graphql';
 
-const Item = ({ beer }: { beer: data }) => {
+const BeerItem = ({ beerItem }: { beerItem: Beer }) => {
 	return (
 		<View style={styles.item}>
 			<Text style={styles.titleBold}>
-				{beer.id}
+				{beerItem.id}
 				{'\n'}
-				{beer.name}
+				{beerItem.name}
 				{'\n'}
-				{beer.type}
+				{beerItem.type}
 			</Text>
 		</View>
 	);
@@ -20,7 +20,9 @@ const styles = StyleSheet.create({
 	item: {
 		backgroundColor: 'white',
 		padding: 20,
-		width: '40%',
+		width: '80%',
+		marginLeft: 'auto',
+		marginRight: 'auto',
 		marginVertical: 8,
 		marginHorizontal: 16,
 	},
@@ -34,4 +36,4 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 	},
 });
-export default Item;
+export default BeerItem;
