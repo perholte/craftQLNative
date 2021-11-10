@@ -1,7 +1,14 @@
 {
-  "extends": "expo/tsconfig.base",
-  "compilerOptions": {
-    "target": "es5",
-    "strict": true
-  }
+	"extends": "expo/tsconfig.base",
+	"compilerOptions": {
+		"target": "es5",
+		"strict": true
+	},
+	"include": [
+		"App.tsx",
+		"src/*.ts",
+		"src/*.tsx",
+		"src/**/*.tsx",
+		"src/**/*.tsx"
+	]
 }
