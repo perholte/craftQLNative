@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList, StyleSheet } from 'react-native';
-import BeerItem from './BeerItem';
 import { Beer, useGetBeersQuery } from '../../__generated__/graphql';
+import BeerItem from './BeerItem';
 
 const RenderBeerItems: React.FC = () => {
 	const { data, fetchMore } = useGetBeersQuery({
@@ -21,7 +21,7 @@ const RenderBeerItems: React.FC = () => {
 			style={styles.container}
 			data={data?.beers}
 			renderItem={renderBeer}
-			keyExtractor={(beer) => ' ' + beer}
+			keyExtractor={(beer) => ' ' + beer.id}
 			horizontal={false}
 			initialNumToRender={4}
 			onEndReached={handleFetchMore}
