@@ -8,7 +8,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import CustomHeader from './components/header/Header';
+import CustomHeader from './src/components/header/Header';
 
 export default function App() {
 	const link = createHttpLink({
