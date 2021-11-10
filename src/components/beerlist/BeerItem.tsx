@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { data } from '../beerCard/RenderBeerItems';
+import { data } from './RenderBeerItems';
 
 const Item = ({ beer }: { beer: data }) => {
 	return (
 		<View style={styles.item}>
-			<Text style={styles.title}>
+			<Text style={styles.titleBold}>
 				{beer.id}
 				{'\n'}
 				{beer.name}
