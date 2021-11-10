@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-	SafeAreaView,
-	View,
-	FlatList,
-	StyleSheet,
-	Text,
-	StatusBar,
-} from 'react-native';
-import CustomHeader from '../header/Header';
+import { FlatList, SafeAreaView, StyleSheet } from 'react-native';
 import BeerItem from './BeerItem';
 
 export interface data {
@@ -19,48 +11,6 @@ export interface data {
 	rating: number;
 }
 const RenderBeerItems = () => {
-	const DATA: Array<data> = [
-		{
-			id: 1621,
-			name: 'Lobo Lito',
-			volume: 0.04,
-			type: 'IPA',
-			brand: 'American Pale Ale',
-			rating: 4,
-		},
-		{
-			id: 2077,
-			name: 'Greenwood Beach',
-			volume: 0.04,
-			type: 'IPA',
-			brand: 'American Pale Ale',
-			rating: 3,
-		},
-		{
-			id: 2174,
-			name: 'Knotty Blonde Ale',
-			volume: 0.04,
-			type: 'IPA',
-			brand: 'American Pale Ale',
-			rating: 4,
-		},
-		{
-			id: 3453,
-			name: 'Yard Sale Winter Lager',
-			volume: 0.04,
-			type: 'IPA',
-			brand: 'American Pale Ale',
-			rating: 4,
-		},
-		{
-			id: 2521,
-			name: 'Trader Session IPA',
-			volume: 0.04,
-			type: 'IPA',
-			brand: 'American Pale Ale',
-			rating: 4,
-		},
-	];
 	const renderBeer = ({ item }: { item: data }) => <BeerItem beer={item} />;
 
 	return (
