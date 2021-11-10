@@ -2390,6 +2390,11 @@ braces@^3.0.1, braces@~3.0.2:
   dependencies:
     fill-range "^7.0.1"
 
+brcast@^2.0.0:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/brcast/-/brcast-2.0.2.tgz#2db16de44140e418dc37fab10beec0369e78dcef"
+  integrity sha512-Tfn5JSE7hrUlFcOoaLzVvkbgIemIorMIyoMr3TgvszWW7jFt2C9PdeMLtysYD9RU0MmU17b69+XJG1eRY2OBRg==
+
 browserslist@^4.16.6, browserslist@^4.17.6:
   version "4.17.6"
   resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.17.6.tgz#c76be33e7786b497f66cad25a73756c8b938985d"
@@ -3763,6 +3768,13 @@ getenv@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/getenv/-/getenv-1.0.0.tgz#874f2e7544fbca53c7a4738f37de8605c3fcfc31"
   integrity sha512-7yetJWqbS9sbn0vIfliPsFgoXMKn/YMF+Wuiog97x+urnSRRRZ7xB+uVkwGKzRgq9CDFfMQnE9ruL5DHv9c6Xg==
+
+glamorous-native@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/glamorous-native/-/glamorous-native-2.0.0.tgz#83309f874923e62d02f00967db3d5c854dd452f8"
+  integrity sha512-qGAs/ra91zhMgm35l8DK4I1Vwjmeu40VyGSDhwxp65ytYZCalkIoFNUxRpJhIpyJHZZXn3d1e/poXPcMUrWv6A==
+  dependencies:
+    brcast "^2.0.0"
 
 glob-parent@^5.1.2, glob-parent@~5.1.2:
   version "5.1.2"

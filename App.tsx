@@ -1,27 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 import CustomHeader from './components/header/Header';
-import BeerModal from './components/beerModal/BeerModal';
+import RenderBeerItems from './components/beerCard/RenderBeerItems';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { StatusBar } from 'expo-status-bar';
 
-export default function App() {
+const App = () => {
 	return (
 		<SafeAreaProvider>
-			<View style={styles.container}>
-				<CustomHeader />
-				<BeerModal />
-				<StatusBar style='auto' />
-			</View>
+			<CustomHeader />
+			<RenderBeerItems />
+			<StatusBar style='auto' />
 		</SafeAreaProvider>
 	);
-}
+};
 
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: 'rgba(232, 205, 102, 255)',
-		alignItems: 'center',
-		justifyContent: 'flex-start',
-	},
-});
+export default App;
