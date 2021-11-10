@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from 'react-native';
 import { Image } from 'react-native-elements/dist/image/Image';
+import { Beer } from '../../__generated__/graphql';
 
-const BeerModal = () => {
+const BeerModal = ({ beerItem }: { beerItem: Beer }) => {
 	const [modalVisible, setModalVisible] = useState(false);
 	return (
-		<View style={styles.centeredView}>
+		<View>
 			<Modal
 				animationType='slide'
 				transparent={true}
@@ -15,18 +16,25 @@ const BeerModal = () => {
 					setModalVisible(!modalVisible);
 				}}
 			>
-				<View style={styles.centeredView}>
+				<View style={styles.modalStyle}>
 					<View style={styles.modalView}>
-						<Text style={styles.modalText}> Rating: 3/5 </Text>
+						<Text style={styles.modalText}>
+							{' '}
+							Rating: {beerItem.rating?.toPrecision(2)} /5{' '}
+						</Text>
 						<Image
-							source={require('../../resources/apple-touch-icon.png')}
+							source={require('../../../resources/beer-icon.png')}
 							style={styles.image}
 						/>
 						<Text style={styles.modalText}>
-							#002 American I.P.A. is a American IPA. It's a
-							strong beer with an alcohol percentage of 7.1 %. The
-							beer is brewed by Lazy Monk Brewing, and our users
-							have given it a rating of 2.8.
+							{beerItem.name} is a(n) {beerItem.type}. It's a
+							strong beer with an alcohol percentage of{' '}
+							{(beerItem.abv * 100).toPrecision(2)} %. The beer is
+							brewed by {beerItem.brand}, and{' '}
+							{beerItem.rating
+								? 'our users have given it a rating of ' +
+								  beerItem.rating.toPrecision(2)
+								: 'has not yet been rated' + '.'}
 						</Text>
 						<Pressable
 							style={[styles.button, styles.buttonClose]}
@@ -38,12 +46,17 @@ const BeerModal = () => {
 				</View>
 			</Modal>
 			<Pressable
-				style={[styles.button, styles.buttonOpen]}
+				style={[styles.button, styles.buttonOpen, styles.modalStyle]}
 				onPress={() => setModalVisible(true)}
 			>
-				<Text style={styles.textStyle}>Tuborg</Text>
-				<Text style={styles.boldTextStyle}>Tuborg Pilsner</Text>
-				<Text style={styles.textStyle}>Rating: 3/5</Text>
+				<Text style={styles.textStyle}>{beerItem.type}</Text>
+				<Text style={styles.boldTextStyle}>{beerItem.name}</Text>
+				<Text style={styles.textStyle}>
+					Rating:{' '}
+					{beerItem.rating
+						? beerItem.rating.toPrecision(2) + ' / 5'
+						: 'Not yet rated'}
+				</Text>
 			</Pressable>
 		</View>
 	);
@@ -56,13 +69,17 @@ const styles = StyleSheet.create({
 		width: 25,
 		height: 25,
 	},
-	centeredView: {
+	modalStyle: {
+		margin: 10,
+	},
+	/*	centeredView: {
 		flexDirection: 'row',
 		flexWrap: 'wrap',
 		justifyContent: 'space-between',
 		alignItems: 'center',
 		margin: 5,
 	},
+	*/
 	modalView: {
 		margin: 20,
 		backgroundColor: 'white',

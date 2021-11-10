@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList, StyleSheet } from 'react-native';
-import BeerItem from './BeerItem';
 import { Beer, useGetBeersQuery } from '../../__generated__/graphql';
+import BeerModal from './BeerModal';
 
 const RenderBeerItems: React.FC = () => {
 	const { data, fetchMore } = useGetBeersQuery({
@@ -13,7 +13,7 @@ const RenderBeerItems: React.FC = () => {
 	};
 
 	const renderBeer = ({ item }: { item: Beer }) => (
-		<BeerItem beerItem={item} />
+		<BeerModal beerItem={item} />
 	);
 
 	return (
