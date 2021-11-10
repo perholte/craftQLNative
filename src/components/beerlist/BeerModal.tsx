@@ -72,14 +72,6 @@ const styles = StyleSheet.create({
 	modalStyle: {
 		margin: 10,
 	},
-	/*	centeredView: {
-		flexDirection: 'row',
-		flexWrap: 'wrap',
-		justifyContent: 'space-between',
-		alignItems: 'center',
-		margin: 5,
-	},
-	*/
 	modalView: {
 		margin: 20,
 		backgroundColor: 'white',
@@ -126,13 +118,3 @@ const styles = StyleSheet.create({
 });
 
 export default BeerModal;
-
-/*
-		flexDirection: 'row',
-		flexWrap: 'wrap',
-		justifyContent: 'space-between',
-		alignItems: 'center',
-		marginTop: 22,
-		height: 100,
-		width: '90%',
-        */

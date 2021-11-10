@@ -6,13 +6,15 @@ import {
 } from '@apollo/client';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { useGetBeersQuery } from './src/__generated__/graphql';
+import { Provider } from 'react-redux';
 import RenderBeerItems from './src/components/beerlist/RenderBeerItems';
 import CustomHeader from './src/components/header/Header';
-import { useGetBeersQuery } from './src/__generated__/graphql';
+import { store } from './src/redux/store';
+import { StyleSheet } from 'react-native';
 
-export default function App() {
+function App() {
 	const link = createHttpLink({
 		uri: 'http://129.241.104.92:4000',
 	});
@@ -37,11 +39,13 @@ export default function App() {
 
 	return (
 		<ApolloProvider client={client}>
-			<SafeAreaProvider>
-				<CustomHeader />
-				<RenderBeerItems />
-				<StatusBar style='auto' />
-			</SafeAreaProvider>
+			<Provider store={store}>
+				<SafeAreaProvider>
+					<CustomHeader />
+					<StatusBar style='auto' />
+					<RenderBeerItems />
+				</SafeAreaProvider>
+			</Provider>
 		</ApolloProvider>
 	);
 }
@@ -55,3 +59,4 @@ const styles = StyleSheet.create({
 		justifyContent: 'flex-start',
 	},
 });
+export default App;
