@@ -7,7 +7,7 @@ const CustomHeader = () => {
 			backgroundColor='rgba(117,56,19,255)'
 			leftComponent={
 				<Image
-					source={require('../../resources/beer-icon.png')}
+					source={require('../../../resources/beer-icon.png')}
 					style={{ width: 25, height: 25 }}
 				/>
 			}
