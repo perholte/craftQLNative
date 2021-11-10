@@ -1,11 +1,11 @@
 overwrite: true
 schema: 'http://129.241.104.92:4000'
-documents: 'api/**/*.graphql'
+documents: 'src/api/**/*.graphql'
 hooks:
     afterAllFileWrite:
         # - prettier --write
 generates:
-    __generated__/graphql.tsx:
+    src/__generated__/graphql.tsx:
         plugins:
             - 'typescript'
             - 'typescript-operations'
