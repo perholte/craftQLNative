@@ -3,7 +3,15 @@ import { Alert, Modal, StyleSheet, Text, Pressable, View } from 'react-native';
 import { Image } from 'react-native-elements/dist/image/Image';
 import { Beer } from '../../__generated__/graphql';
 
-const BeerModal = ({ beerItem }: { beerItem: Beer }) => {
+interface BeerModalProps {
+	beerItem: Beer;
+}
+
+const BeerModal: React.FC<BeerModalProps> = ({
+	beerItem,
+}: {
+	beerItem: Beer;
+}) => {
 	const [modalVisible, setModalVisible] = useState(false);
 	return (
 		<View>
@@ -20,7 +28,10 @@ const BeerModal = ({ beerItem }: { beerItem: Beer }) => {
 					<View style={styles.modalView}>
 						<Text style={styles.modalText}>
 							{' '}
-							Rating: {beerItem.rating?.toPrecision(2)} /5{' '}
+							Rating:{' '}
+							{beerItem.rating
+								? beerItem.rating.toPrecision(2) + ' / 5'
+								: 'Not yet rated'}{' '}
 						</Text>
 						<Image
 							source={require('../../../resources/beer-icon.png')}
