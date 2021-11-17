@@ -7,7 +7,7 @@ import { RootState } from '../../redux/store';
 
 const RenderBeerItems: React.FC = () => {
 	const filters = useSelector((state: RootState) => state);
-	const { data, fetchMore } = useGetBeersQuery({
+	const { data, fetchMore, refetch } = useGetBeersQuery({
 		variables: { skip: 0, sort: filters.sort.graphqlParams },
 	});
 
@@ -20,6 +20,10 @@ const RenderBeerItems: React.FC = () => {
 		});
 	};
 
+	useEffect(() => {
+		refetch();
+	}, [filters]);
+
 	const renderBeer = ({ item }: { item: Beer }) => (
 		<BeerModal beerItem={item} key={item.id} />
 	);
@@ -31,7 +35,7 @@ const RenderBeerItems: React.FC = () => {
 			renderItem={renderBeer}
 			keyExtractor={(beer) => ' ' + beer.id}
 			horizontal={false}
-			initialNumToRender={4}
+			initialNumToRender={20}
 			onEndReached={handleFetchMore}
 			onEndReachedThreshold={0.1}
 		/>
