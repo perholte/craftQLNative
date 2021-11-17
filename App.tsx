@@ -7,10 +7,12 @@ import {
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { useGetBeersQuery } from './src/__generated__/graphql';
 import { Provider } from 'react-redux';
-import RenderBeerItems from './src/components/beerCard/RenderBeerItems';
+import RenderBeerItems from './src/components/beerlist/RenderBeerItems';
 import CustomHeader from './src/components/header/Header';
 import { store } from './src/redux/store';
+import { StyleSheet } from 'react-native';
 
 function App() {
 	const link = createHttpLink({
@@ -19,7 +21,20 @@ function App() {
 
 	const client = new ApolloClient({
 		link,
-		cache: new InMemoryCache(),
+		cache: new InMemoryCache({
+			typePolicies: {
+				Query: {
+					fields: {
+						beers: {
+							keyArgs: [],
+							merge(existing = [], incoming) {
+								return [...existing, ...incoming];
+							},
+						},
+					},
+				},
+			},
+		}),
 	});
 
 	return (
@@ -35,4 +50,13 @@ function App() {
 	);
 }
 
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		margin: 0,
+		backgroundColor: '#fff',
+		alignItems: 'center',
+		justifyContent: 'flex-start',
+	},
+});
 export default App;
