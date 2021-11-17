@@ -1,30 +1,48 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 import { Beer, useGetBeersQuery } from '../../__generated__/graphql';
 import FlatListWithScrollToTop from '../scroll-to-top/FlatListWithScrollToTop';
-import BeerItem from './BeerItem';
+import BeerModal from './BeerModal';
 
 const RenderBeerItems: React.FC = () => {
-	const { data, fetchMore } = useGetBeersQuery({
-		variables: { skip: 0, sort: {} },
-		fetchPolicy: 'cache-and-network',
+	const filters = useSelector((state: RootState) => state);
+	const { data, fetchMore, refetch } = useGetBeersQuery({
+		variables: { skip: 0, sort: filters.sort.graphqlParams },
 	});
 	const handleFetchMore = () => {
-		if (data && data.beers.length > 30) {
-			return;
-		}
-		fetchMore({ variables: { skip: data?.beers.length } });
+		fetchMore({
+			variables: {
+				skip: data?.beers.length,
+				sort: filters.sort.graphqlParams,
+			},
+		});
 	};
 
+	useEffect(() => {
+		refetch();
+	}, [filters]);
+
+	if (data?.beers) {
+		const ids = data.beers.map((beer: Beer) => beer.id);
+		console.log(ids.length);
+		console.log(new Set(ids).size);
+	}
+
 	const renderBeer = ({ item }: { item: Beer }) => (
-		<BeerItem beerItem={item} />
+		<BeerModal beerItem={item} key={item.id} />
 	);
 	return (
 		<View style={{ flex: 1 }}>
 			<FlatListWithScrollToTop
 				beers={data?.beers}
 				renderBeer={renderBeer}
-				keyExtractor={(beer) => ' ' + beer.id}
+				keyExtractor={(beer) =>
+					`${beer.id}-${(Math.random() + 1)
+						.toString(36)
+						.substring(7)}`
+				}
 				handleFetchMore={handleFetchMore} //
 				style={styles.container}
 			/>

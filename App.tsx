@@ -10,6 +10,7 @@ import { StyleSheet } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
 import RenderBeerItems from './src/components/beerlist/RenderBeerItems';
+import Filters from './src/components/filters/Filters';
 import CustomHeader from './src/components/header/Header';
 import { store } from './src/redux/store';
 
@@ -42,6 +43,7 @@ function App() {
 				<SafeAreaProvider>
 					<CustomHeader />
 					<StatusBar style='auto' />
+					<Filters />
 					<RenderBeerItems />
 				</SafeAreaProvider>
 			</Provider>

@@ -22,7 +22,6 @@ const FlatListWithScrollToTop: FC<IFlatListProps> = (props) => {
 			const params = {
 				offset: 0,
 			};
-			// scrollToIndex
 			listRef.current.scrollToOffset(params);
 		}
 	};
@@ -50,7 +49,7 @@ const FlatListWithScrollToTop: FC<IFlatListProps> = (props) => {
 				keyExtractor={keyExtractor}
 				onEndReached={handleFetchMore}
 				initialNumToRender={5}
-				onEndReachedThreshold={0.1}
+				onEndReachedThreshold={0.5}
 				ListHeaderComponent={null}
 				horizontal={false}
 				style={style}
