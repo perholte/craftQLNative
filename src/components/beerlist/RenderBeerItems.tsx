@@ -10,17 +10,29 @@ const RenderBeerItems: React.FC = () => {
 	const filters = useSelector((state: RootState) => state);
 
 	const { data, fetchMore, refetch } = useGetBeersQuery({
-		variables: { skip: 0, sort: {}, filter: filters.search },
+		variables: {
+			skip: 0,
+			sort: filters.sort.graphqlParams,
+			filter: filters.search,
+		},
 	});
 
 	const handleFetchMore = () => {
 		fetchMore({
-			variables: { skip: data?.beers.length, filter: filters.search },
+			variables: {
+				skip: data?.beers.length,
+				sort: filters.sort.graphqlParams,
+				filter: filters.search,
+			},
 		});
 	};
 
+	useEffect(() => {
+		refetch();
+	}, [filters]);
+
 	const renderBeer = ({ item }: { item: Beer }) => (
-		<BeerModal beerItem={item} />
+		<BeerModal beerItem={item} key={item.id} />
 	);
 
 	useEffect(() => {
@@ -36,7 +48,7 @@ const RenderBeerItems: React.FC = () => {
 				renderItem={renderBeer}
 				keyExtractor={(beer) => ' ' + beer.id}
 				horizontal={false}
-				initialNumToRender={4}
+				initialNumToRender={20}
 				onEndReached={handleFetchMore}
 				onEndReachedThreshold={0.1}
 			/>
