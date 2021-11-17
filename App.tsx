@@ -13,6 +13,7 @@ import RenderBeerItems from './src/components/beerlist/RenderBeerItems';
 import CustomHeader from './src/components/header/Header';
 import { store } from './src/redux/store';
 import { StyleSheet } from 'react-native';
+import Searchbar from './src/components/filters/Searchbar';
 
 function App() {
 	const link = createHttpLink({
@@ -43,6 +44,7 @@ function App() {
 				<SafeAreaProvider>
 					<CustomHeader />
 					<StatusBar style='auto' />
+					<Searchbar />
 					<RenderBeerItems />
 				</SafeAreaProvider>
 			</Provider>
