@@ -23,6 +23,7 @@ const BeerModal: React.FC<BeerModalProps> = ({
 					Alert.alert('Modal has been closed.');
 					setModalVisible(!modalVisible);
 				}}
+				key={beerItem.id}
 			>
 				<View style={styles.modalStyle}>
 					<View style={styles.modalView}>
