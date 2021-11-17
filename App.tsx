@@ -7,12 +7,11 @@ import {
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { useGetBeersQuery } from './src/__generated__/graphql';
 import { Provider } from 'react-redux';
 import RenderBeerItems from './src/components/beerlist/RenderBeerItems';
+import Filters from './src/components/filters/Filters';
 import CustomHeader from './src/components/header/Header';
 import { store } from './src/redux/store';
-import { StyleSheet } from 'react-native';
 
 function App() {
 	const link = createHttpLink({
@@ -43,6 +42,7 @@ function App() {
 				<SafeAreaProvider>
 					<CustomHeader />
 					<StatusBar style='auto' />
+					<Filters />
 					<RenderBeerItems />
 				</SafeAreaProvider>
 			</Provider>
@@ -50,13 +50,4 @@ function App() {
 	);
 }
 
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		margin: 0,
-		backgroundColor: '#fff',
-		alignItems: 'center',
-		justifyContent: 'flex-start',
-	},
-});
 export default App;

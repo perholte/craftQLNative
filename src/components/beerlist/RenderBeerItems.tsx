@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 import { Beer, useGetBeersQuery } from '../../__generated__/graphql';
 import BeerModal from './BeerModal';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
 const RenderBeerItems: React.FC = () => {
+	const filters = useSelector((state: RootState) => state);
 	const { data, fetchMore } = useGetBeersQuery({
-		variables: { skip: 0, sort: {} },
+		variables: { skip: 0, sort: filters.sort.graphqlParams },
 	});
 
 	const handleFetchMore = () => {
-		fetchMore({ variables: { skip: data?.beers.length } });
+		fetchMore({
+			variables: {
+				skip: data?.beers.length,
+				sort: filters.sort.graphqlParams,
+			},
+		});
 	};
 
 	const renderBeer = ({ item }: { item: Beer }) => (
-		<BeerModal beerItem={item} />
+		<BeerModal beerItem={item} key={item.id} />
 	);
 
 	return (
