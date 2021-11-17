@@ -13,11 +13,12 @@ const BeerModal: React.FC<BeerModalProps> = ({
 	beerItem: Beer;
 }) => {
 	const [modalVisible, setModalVisible] = useState(false);
+	const [rating, setRating] = useState(0);
 	return (
 		<View>
 			<Modal
-				animationType='slide'
 				transparent={true}
+				animationType='slide'
 				visible={modalVisible}
 				onRequestClose={() => {
 					Alert.alert('Modal has been closed.');
@@ -34,10 +35,6 @@ const BeerModal: React.FC<BeerModalProps> = ({
 								? beerItem.rating.toPrecision(2) + ' / 5'
 								: 'Not yet rated'}{' '}
 						</Text>
-						<Image
-							source={require('../../../resources/beer-icon.png')}
-							style={styles.image}
-						/>
 						<Text style={styles.modalText}>
 							{beerItem.name} is a(n) {beerItem.type}. It's a
 							strong beer with an alcohol percentage of{' '}
@@ -48,6 +45,41 @@ const BeerModal: React.FC<BeerModalProps> = ({
 								  beerItem.rating.toPrecision(2)
 								: 'has not yet been rated' + '.'}
 						</Text>
+						<Text>{rating}</Text>
+						<View style={styles.ratingStyle}>
+							<Pressable
+								style={styles.ratingImage}
+								onPress={() => {
+									if (rating < 5) {
+										setRating(rating + 1);
+									}
+								}}
+							>
+								<Image
+									source={require('../../../resources/beer-icon.png')}
+									style={styles.image}
+								/>
+							</Pressable>
+							<Pressable
+								style={styles.ratingImage}
+								onPress={() => {
+									if (rating > 0) {
+										setRating(rating - 1);
+									}
+								}}
+							>
+								<Image
+									source={require('../../../resources/beer-icon.png')}
+									style={styles.image}
+								/>
+							</Pressable>
+						</View>
+						<Pressable
+							style={[styles.button, styles.buttonClose]}
+							onPress={() => setModalVisible(!modalVisible)}
+						>
+							<Text style={styles.textStyle}>Rate Beer</Text>
+						</Pressable>
 						<Pressable
 							style={[styles.button, styles.buttonClose]}
 							onPress={() => setModalVisible(!modalVisible)}
@@ -83,12 +115,16 @@ const styles = StyleSheet.create({
 	},
 	modalStyle: {
 		margin: 10,
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center',
 	},
 	modalView: {
 		margin: 20,
 		backgroundColor: 'white',
 		borderRadius: 20,
 		padding: 35,
+		justifyContent: 'center',
 		alignItems: 'center',
 		shadowColor: '#000',
 		shadowOffset: {
@@ -126,6 +162,14 @@ const styles = StyleSheet.create({
 		marginBottom: 15,
 		textAlign: 'center',
 		color: 'rgba(117, 56, 19, 255)',
+	},
+	ratingStyle: {
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+	},
+	ratingImage: {
+		margin: 'auto',
 	},
 });
 
