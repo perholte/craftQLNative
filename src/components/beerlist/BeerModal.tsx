@@ -1,20 +1,30 @@
 import React, { useState } from 'react';
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from 'react-native';
 import { Image } from 'react-native-elements/dist/image/Image';
-import { Beer } from '../../__generated__/graphql';
+import { Beer, useRateBeerMutation } from '../../__generated__/graphql';
 import { AntDesign } from '@expo/vector-icons';
 
 interface BeerModalProps {
 	beerItem: Beer;
 }
 
-const BeerModal: React.FC<BeerModalProps> = ({
-	beerItem,
-}: {
-	beerItem: Beer;
-}) => {
+const BeerModal: React.FC<BeerModalProps> = ({ beerItem }: {beerItem: Beer}) => {
 	const [modalVisible, setModalVisible] = useState(false);
-	const [rating, setRating] = useState(0);
+	const [rating, setRating] = useState<number>(0);
+
+	const [rateBeerMutation] = useRateBeerMutation({
+		variables: {
+			beerId: beerItem.id,
+			rating: rating,
+		},
+	});
+
+	const submitRating = () => {
+		if (rating >= 1 && rating <= 5) {
+			rateBeerMutation();
+		}
+	};
+
 	return (
 		<View>
 			<Modal
@@ -93,7 +103,7 @@ const BeerModal: React.FC<BeerModalProps> = ({
 						</View>
 						<Pressable
 							style={[styles.button, styles.rateButton]}
-							onPress={() => setModalVisible(!modalVisible)}
+							onPress={() => submitRating()}
 						>
 							<Text style={styles.textStyle}>Rate Beer</Text>
 						</Pressable>

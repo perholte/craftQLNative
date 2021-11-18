@@ -45,8 +45,9 @@ const RenderBeerItems: React.FC = () => {
 				ListHeaderComponent={Searchbar}
 				style={styles.container}
 				data={data?.beers}
+				extraData={data?.beers}
 				renderItem={renderBeer}
-				keyExtractor={(beer) => ' ' + beer.id}
+				keyExtractor={(beerItem) => ' ' + beerItem.id}
 				horizontal={false}
 				initialNumToRender={20}
 				onEndReached={handleFetchMore}
