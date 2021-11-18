@@ -8,14 +8,20 @@ import BeerModal from './BeerModal';
 
 const RenderBeerItems: React.FC = () => {
 	const filters = useSelector((state: RootState) => state);
+
 	const { data, fetchMore, refetch } = useGetBeersQuery({
-		variables: { skip: 0, sort: filters.sort.graphqlParams },
+		variables: {
+			skip: 0,
+			sort: filters.sort.graphqlParams,
+			filter: filters.search,
+		},
 	});
 	const handleFetchMore = () => {
 		fetchMore({
 			variables: {
 				skip: data?.beers.length,
 				sort: filters.sort.graphqlParams,
+				filter: filters.search,
 			},
 		});
 	};
@@ -23,12 +29,6 @@ const RenderBeerItems: React.FC = () => {
 	useEffect(() => {
 		refetch();
 	}, [filters]);
-
-	if (data?.beers) {
-		const ids = data.beers.map((beer: Beer) => beer.id);
-		console.log(ids.length);
-		console.log(new Set(ids).size);
-	}
 
 	const renderBeer = ({ item }: { item: Beer }) => (
 		<BeerModal beerItem={item} key={item.id} />
@@ -43,7 +43,7 @@ const RenderBeerItems: React.FC = () => {
 						.toString(36)
 						.substring(7)}`
 				}
-				handleFetchMore={handleFetchMore} //
+				handleFetchMore={handleFetchMore}
 				style={styles.container}
 			/>
 		</View>

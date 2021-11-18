@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from 'react-native';
-import { Image } from 'react-native-elements/dist/image/Image';
+import { Image } from 'react-native-elements';
 import { Beer } from '../../__generated__/graphql';
+import Rating from '../beerlist/Rating';
 
 interface BeerModalProps {
 	beerItem: Beer;
@@ -13,11 +14,12 @@ const BeerModal: React.FC<BeerModalProps> = ({
 	beerItem: Beer;
 }) => {
 	const [modalVisible, setModalVisible] = useState(false);
+
 	return (
 		<View>
 			<Modal
-				animationType='slide'
 				transparent={true}
+				animationType='slide'
 				visible={modalVisible}
 				onRequestClose={() => {
 					Alert.alert('Modal has been closed.');
@@ -48,6 +50,7 @@ const BeerModal: React.FC<BeerModalProps> = ({
 								  beerItem.rating.toPrecision(2)
 								: 'has not yet been rated' + '.'}
 						</Text>
+						<Rating beer={beerItem} />
 						<Pressable
 							style={[styles.button, styles.buttonClose]}
 							onPress={() => setModalVisible(!modalVisible)}
@@ -83,12 +86,16 @@ const styles = StyleSheet.create({
 	},
 	modalStyle: {
 		margin: 10,
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center',
 	},
 	modalView: {
 		margin: 20,
 		backgroundColor: 'white',
 		borderRadius: 20,
 		padding: 35,
+		justifyContent: 'center',
 		alignItems: 'center',
 		shadowColor: '#000',
 		shadowOffset: {

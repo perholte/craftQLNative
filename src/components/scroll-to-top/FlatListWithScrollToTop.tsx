@@ -1,6 +1,7 @@
 import React, { FC, useRef, useState } from 'react';
 import { FlatList, ScrollView, StyleSheet } from 'react-native';
 import { Beer } from '../../__generated__/graphql';
+import Searchbar from '../filters/Searchbar';
 import ScrollToTop from './ScrollToTop';
 
 interface IFlatListProps {
@@ -41,7 +42,9 @@ const FlatListWithScrollToTop: FC<IFlatListProps> = (props) => {
 			)}
 			<FlatList
 				ref={listRef}
+				ListHeaderComponent={Searchbar}
 				data={beers}
+				extraData={beers} // Updates the visible rating without re-rendering the entire page
 				onScroll={(event) => {
 					setContentVerticalOffset(event.nativeEvent.contentOffset.y);
 				}}
@@ -50,7 +53,6 @@ const FlatListWithScrollToTop: FC<IFlatListProps> = (props) => {
 				onEndReached={handleFetchMore}
 				initialNumToRender={5}
 				onEndReachedThreshold={0.5}
-				ListHeaderComponent={null}
 				horizontal={false}
 				style={style}
 			/>
