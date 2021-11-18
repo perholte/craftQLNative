@@ -35,10 +35,6 @@ const RenderBeerItems: React.FC = () => {
 		<BeerModal beerItem={item} key={item.id} />
 	);
 
-	useEffect(() => {
-		refetch();
-	}, [filters]);
-
 	return (
 		<>
 			<FlatList
@@ -62,15 +58,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		padding: 20,
 		backgroundColor: 'rgba(232, 205, 102, 255)',
-	},
-	submitButton: {
-		position: 'absolute',
-		top: 0,
-		left: 0,
-		color: 'black',
-		backgroundColor: 'blue',
-		width: 'fit-content',
-		height: 'fit-content',
 	},
 });
 

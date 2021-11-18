@@ -6,7 +6,7 @@ import useDebounce from '../../hooks/Debounce';
 import { setSearchValue } from '../../redux/slices/searchSlice';
 
 const Searchbar = () => {
-	const { value: startValue, field } = useSelector(
+	const { value: startValue } = useSelector(
 		(state: RootState) => state.search
 	);
 	const [value, setValue] = useState<string>(startValue || '');
