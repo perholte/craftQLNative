@@ -43,7 +43,7 @@ const RenderBeerItems: React.FC = () => {
 				data={data?.beers}
 				extraData={data?.beers}
 				renderItem={renderBeer}
-				keyExtractor={(beerItem) => ' ' + beerItem.id}
+				keyExtractor={(item) => ' ' + item.id}
 				horizontal={false}
 				initialNumToRender={20}
 				onEndReached={handleFetchMore}
