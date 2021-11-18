@@ -1,14 +1,20 @@
 import React, { useEffect } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
-import { Beer, useGetBeersQuery } from '../../__generated__/graphql';
-import BeerModal from './BeerModal';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
+import { Beer, useGetBeersQuery } from '../../__generated__/graphql';
+import Searchbar from '../filters/Searchbar';
+import BeerModal from './BeerModal';
 
 const RenderBeerItems: React.FC = () => {
 	const filters = useSelector((state: RootState) => state);
+
 	const { data, fetchMore, refetch } = useGetBeersQuery({
-		variables: { skip: 0, sort: filters.sort.graphqlParams },
+		variables: {
+			skip: 0,
+			sort: filters.sort.graphqlParams,
+			filter: filters.search,
+		},
 	});
 
 	const handleFetchMore = () => {
@@ -16,6 +22,7 @@ const RenderBeerItems: React.FC = () => {
 			variables: {
 				skip: data?.beers.length,
 				sort: filters.sort.graphqlParams,
+				filter: filters.search,
 			},
 		});
 	};
@@ -29,16 +36,19 @@ const RenderBeerItems: React.FC = () => {
 	);
 
 	return (
-		<FlatList
-			style={styles.container}
-			data={data?.beers}
-			renderItem={renderBeer}
-			keyExtractor={(beer) => ' ' + beer.id}
-			horizontal={false}
-			initialNumToRender={20}
-			onEndReached={handleFetchMore}
-			onEndReachedThreshold={0.1}
-		/>
+		<>
+			<FlatList
+				ListHeaderComponent={Searchbar}
+				style={styles.container}
+				data={data?.beers}
+				renderItem={renderBeer}
+				keyExtractor={(beer) => ' ' + beer.id}
+				horizontal={false}
+				initialNumToRender={20}
+				onEndReached={handleFetchMore}
+				onEndReachedThreshold={0.1}
+			/>
+		</>
 	);
 };
 
