@@ -5,7 +5,7 @@ import { Image, Text } from 'react-native-elements';
 import { Beer, useRateBeerMutation } from '../../__generated__/graphql';
 
 const Rating = ({ beer }: { beer: Beer }) => {
-	const [rating, setRating] = useState<number>(0);
+	const [rating, setRating] = useState<number>(1);
 
 	const [rateBeerMutation] = useRateBeerMutation({
 		variables: {
@@ -41,7 +41,7 @@ const Rating = ({ beer }: { beer: Beer }) => {
 					<Pressable
 						style={styles.ratingImage}
 						onPress={() => {
-							if (rating > 0) {
+							if (rating > 1) {
 								setRating(rating - 1);
 							}
 						}}
