@@ -2,50 +2,54 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { BeerOrder, Sort } from '../../__generated__/graphql';
 
 export enum SortOptions {
-    AlphabeticASC = 'Name: A - Z',
-    AlphabeticDESC = 'Name: Z - A',
-    BrandASC = 'Brand: A - Z',
-    BrandDESC = 'Brand: Z - A',
-    TypeASC = 'Type A - Z',
-    TypeDESC = 'Type Z - A',
-    AlcoholASC = 'Most alcohol',
-    AlcoholDESC = 'Least alcohol',
-    RatingDESC = 'Highest rating',
-    RatingASC = 'Lowest rating',
+	AlphabeticASC = 'Name: A - Z',
+	AlphabeticDESC = 'Name: Z - A',
+	BrandASC = 'Brand: A - Z',
+	BrandDESC = 'Brand: Z - A',
+	TypeASC = 'Type A - Z',
+	TypeDESC = 'Type Z - A',
+	AlcoholASC = 'Least alcohol',
+	AlcoholDESC = 'Most alcohol',
+	RatingDESC = 'Highest rating',
+	RatingASC = 'Lowest rating',
 }
 
 const sortOptionToGraphqlParams = new Map<SortOptions, BeerOrder>([
-    [SortOptions.AlphabeticASC, { name: Sort.Asc }],
-    [SortOptions.AlphabeticDESC, { name: Sort.Desc }],
-    [SortOptions.BrandASC, { brand: Sort.Asc }],
-    [SortOptions.BrandDESC, { brand: Sort.Desc }],
-    [SortOptions.TypeASC, { type: Sort.Asc }],
-    [SortOptions.TypeDESC, { type: Sort.Desc }],
-    [SortOptions.AlcoholASC, { abv: Sort.Asc }],
-    [SortOptions.AlcoholDESC, { abv: Sort.Desc }],
-    [SortOptions.RatingASC, { rating: Sort.Asc }],
-    [SortOptions.RatingDESC, { rating: Sort.Desc }],
+	[SortOptions.AlphabeticASC, { name: Sort.Asc }],
+	[SortOptions.AlphabeticDESC, { name: Sort.Desc }],
+	[SortOptions.BrandASC, { brand: Sort.Asc }],
+	[SortOptions.BrandDESC, { brand: Sort.Desc }],
+	[SortOptions.TypeASC, { type: Sort.Asc }],
+	[SortOptions.TypeDESC, { type: Sort.Desc }],
+	[SortOptions.AlcoholASC, { abv: Sort.Asc }],
+	[SortOptions.AlcoholDESC, { abv: Sort.Desc }],
+	[SortOptions.RatingASC, { rating: Sort.Asc }],
+	[SortOptions.RatingDESC, { rating: Sort.Desc }],
 ]);
 
 export interface SortState {
-    sortOption: SortOptions;
-    graphqlParams: BeerOrder;
+	sortOption: SortOptions;
+	graphqlParams: BeerOrder;
 }
 
 const initialState: SortState = {
-    sortOption: SortOptions.AlphabeticASC,
-    graphqlParams: sortOptionToGraphqlParams.get(SortOptions.AlphabeticASC) as BeerOrder,
+	sortOption: SortOptions.AlphabeticASC,
+	graphqlParams: sortOptionToGraphqlParams.get(
+		SortOptions.AlphabeticASC
+	) as BeerOrder,
 };
 
 export const sortSlice = createSlice({
-    name: 'sort',
-    initialState,
-    reducers: {
-        setSortingChoice: (state, action: PayloadAction<SortOptions>) => {
-            state.sortOption = action.payload;
-            state.graphqlParams = sortOptionToGraphqlParams.get(action.payload) as BeerOrder;
-        },
-    },
+	name: 'sort',
+	initialState,
+	reducers: {
+		setSortingChoice: (state, action: PayloadAction<SortOptions>) => {
+			state.sortOption = action.payload;
+			state.graphqlParams = sortOptionToGraphqlParams.get(
+				action.payload
+			) as BeerOrder;
+		},
+	},
 });
 
 // Action creators are generated for each case reducer function

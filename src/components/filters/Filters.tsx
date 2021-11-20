@@ -13,12 +13,9 @@ const Filters = () => {
 
 const styles = StyleSheet.create({
 	container: {
-		width: '100%',
-		display: 'flex',
-		flexDirection: 'column',
-		flexWrap: 'wrap',
-		alignItems: 'flex-end',
-		justifyContent: 'space-between',
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-evenly',
 		backgroundColor: 'rgba(232, 205, 102, 255)',
 	},
 });
