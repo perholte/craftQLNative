@@ -6,7 +6,7 @@ import { Beer, useGetBeersQuery } from '../../__generated__/graphql';
 import FlatListWithScrollToTop from '../scroll-to-top/FlatListWithScrollToTop';
 import BeerModal from './BeerModal';
 
-const RenderBeerItems: React.FC = () => {
+const BeerList: React.FC = () => {
 	const filters = useSelector((state: RootState) => state);
 
 	const { data, fetchMore, refetch } = useGetBeersQuery({
@@ -58,4 +58,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default RenderBeerItems;
+export default BeerList;
