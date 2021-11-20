@@ -1,5 +1,5 @@
 import React, { FC, useRef, useState } from 'react';
-import { FlatList, ScrollView, StyleSheet } from 'react-native';
+import { FlatList, ScrollView, StyleSheet, Text } from 'react-native';
 import { Beer } from '../../__generated__/graphql';
 import Searchbar from '../filters/Searchbar';
 import ScrollToTop from './ScrollToTop';
@@ -12,7 +12,7 @@ interface IFlatListProps {
 	style?: StyleSheet.NamedStyles<{}>;
 }
 
-const FlatListWithScrollToTop: FC<IFlatListProps> = (props) => {
+const FlatListWithScrollToTop: FC<IFlatListProps> = (props: IFlatListProps) => {
 	const { beers, renderBeer, keyExtractor, handleFetchMore, style } = props;
 	const listRef = useRef<FlatList>(null);
 	const [contentVerticalOffset, setContentVerticalOffset] =
@@ -45,6 +45,7 @@ const FlatListWithScrollToTop: FC<IFlatListProps> = (props) => {
 				ListHeaderComponent={Searchbar}
 				data={beers}
 				extraData={beers} // Updates the visible rating without re-rendering the entire page
+				ListEmptyComponent={EmptyList}
 				onScroll={(event) => {
 					setContentVerticalOffset(event.nativeEvent.contentOffset.y);
 				}}
@@ -59,11 +60,20 @@ const FlatListWithScrollToTop: FC<IFlatListProps> = (props) => {
 		</>
 	);
 };
+
+const EmptyList: FC = () => {
+	return <Text style={styles.emptyListText}>No beers found</Text>;
+};
+
 const styles = StyleSheet.create({
 	scrollTopButton: {
 		position: 'absolute',
 		bottom: 0,
 		right: 0,
+	},
+	emptyListText: {
+		textAlign: 'center',
+		marginTop: 10,
 	},
 });
 

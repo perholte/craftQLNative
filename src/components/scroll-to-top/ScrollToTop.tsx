@@ -6,7 +6,7 @@ interface IScrollToTopProps {
 	onClick: () => void;
 }
 
-const ScrollToTop: FC<IScrollToTopProps> = (props) => {
+const ScrollToTop: FC<IScrollToTopProps> = (props: IScrollToTopProps) => {
 	return (
 		<AntDesign
 			style={styles.button}
