@@ -4,12 +4,16 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import { Image, Text } from 'react-native-elements';
 import { Beer, useRateBeerMutation } from '../../__generated__/graphql';
 
-const Rating = ({ beer }: { beer: Beer }) => {
+export interface RatingProps {
+	id: string;
+}
+
+const Rating: React.FC<RatingProps> = ({ id }) => {
 	const [rating, setRating] = useState<number>(1);
 
 	const [rateBeerMutation] = useRateBeerMutation({
 		variables: {
-			beerId: beer.id,
+			beerId: id,
 			rating: rating,
 		},
 	});

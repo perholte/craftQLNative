@@ -8,11 +8,7 @@ interface BeerModalProps {
 	beerItem: Beer;
 }
 
-const BeerModal: React.FC<BeerModalProps> = ({
-	beerItem,
-}: {
-	beerItem: Beer;
-}) => {
+const BeerModal: React.FC<BeerModalProps> = ({ beerItem }) => {
 	const [modalVisible, setModalVisible] = useState(false);
 
 	return (
@@ -29,6 +25,9 @@ const BeerModal: React.FC<BeerModalProps> = ({
 			>
 				<View style={styles.modalStyle}>
 					<View style={styles.modalView}>
+						<Text style={styles.boldTextStyle}>
+							{beerItem.name}
+						</Text>
 						<Text style={styles.modalText}>
 							{' '}
 							Rating:{' '}
@@ -50,7 +49,7 @@ const BeerModal: React.FC<BeerModalProps> = ({
 								  beerItem.rating.toPrecision(2)
 								: 'has not yet been rated' + '.'}
 						</Text>
-						<Rating beer={beerItem} />
+						<Rating id={beerItem.id} />
 						<Pressable
 							style={[styles.button, styles.buttonClose]}
 							onPress={() => setModalVisible(!modalVisible)}
