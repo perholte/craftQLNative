@@ -11,7 +11,7 @@ const Sort: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const selected = useSelector((state: RootState) => state.sort.sortOption);
 	const [open, setOpen] = useState(false);
-	const [value, setValue] = useState<SortOptions>(SortOptions.AlcoholDESC);
+	const [value, setValue] = useState<SortOptions>(SortOptions.AlcoholASC);
 
 	useEffect(() => {
 		setValue(selected);
