@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from 'react-native';
+import { Image } from 'react-native-elements';
 import { Beer } from '../../__generated__/graphql';
 import Rating from '../beerlist/Rating';
 
@@ -35,6 +36,10 @@ const BeerModal: React.FC<BeerModalProps> = ({
 								? beerItem.rating.toPrecision(2) + ' / 5'
 								: 'Not yet rated'}{' '}
 						</Text>
+						<Image
+							source={require('../../../resources/beer-icon.png')}
+							style={styles.image}
+						/>
 						<Text style={styles.modalText}>
 							{beerItem.name} is a(n) {beerItem.type}. It's a
 							strong beer with an alcohol percentage of{' '}
@@ -50,7 +55,7 @@ const BeerModal: React.FC<BeerModalProps> = ({
 							style={[styles.button, styles.buttonClose]}
 							onPress={() => setModalVisible(!modalVisible)}
 						>
-							<Text style={styles.textStyle}>Hide Modal</Text>
+							<Text style={styles.textStyle}>Close</Text>
 						</Pressable>
 					</View>
 				</View>

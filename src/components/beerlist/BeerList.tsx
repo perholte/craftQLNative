@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { Beer, useGetBeersQuery } from '../../__generated__/graphql';
-import Searchbar from '../filters/Searchbar';
+import FlatListWithScrollToTop from '../scroll-to-top/FlatListWithScrollToTop';
 import BeerModal from './BeerModal';
 
-const RenderBeerItems: React.FC = () => {
+const BeerList: React.FC = () => {
 	const filters = useSelector((state: RootState) => state);
 
 	const { data, fetchMore, refetch } = useGetBeersQuery({
@@ -16,7 +16,6 @@ const RenderBeerItems: React.FC = () => {
 			filter: filters.search,
 		},
 	});
-
 	const handleFetchMore = () => {
 		fetchMore({
 			variables: {
@@ -34,22 +33,20 @@ const RenderBeerItems: React.FC = () => {
 	const renderBeer = ({ item }: { item: Beer }) => (
 		<BeerModal beerItem={item} key={item.id} />
 	);
-
 	return (
-		<>
-			<FlatList
-				ListHeaderComponent={Searchbar}
+		<View style={{ flex: 1 }}>
+			<FlatListWithScrollToTop
+				beers={data?.beers}
+				renderBeer={renderBeer}
+				keyExtractor={(beer) =>
+					`${beer.id}-${(Math.random() + 1)
+						.toString(36)
+						.substring(7)}`
+				}
+				handleFetchMore={handleFetchMore}
 				style={styles.container}
-				data={data?.beers}
-				extraData={data?.beers}
-				renderItem={renderBeer}
-				keyExtractor={(item) => ' ' + item.id}
-				horizontal={false}
-				initialNumToRender={20}
-				onEndReached={handleFetchMore}
-				onEndReachedThreshold={0.1}
 			/>
-		</>
+		</View>
 	);
 };
 
@@ -61,4 +58,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default RenderBeerItems;
+export default BeerList;
