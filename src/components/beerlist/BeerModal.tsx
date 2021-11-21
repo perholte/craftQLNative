@@ -19,7 +19,7 @@ const BeerModal: React.FC<BeerModalProps> = ({
 		<View>
 			<Modal
 				transparent={true}
-				animationType='slide'
+				animationType='fade'
 				visible={modalVisible}
 				onRequestClose={() => {
 					Alert.alert('Modal has been closed.');
