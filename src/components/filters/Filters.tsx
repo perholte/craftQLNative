@@ -13,6 +13,7 @@ const Filters = () => {
 
 const styles = StyleSheet.create({
 	container: {
+		zIndex: 1000,
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-evenly',
