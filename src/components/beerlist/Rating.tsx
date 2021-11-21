@@ -22,50 +22,38 @@ const Rating = ({ beer }: { beer: Beer }) => {
 
 	return (
 		<View>
-			<Text style={styles.ratingNumber}>{rating}</Text>
-			<View style={styles.ratingStyle}>
-				<View style={styles.beerStyles}>
-					<Pressable
-						style={styles.ratingImage}
-						onPress={() => {
-							if (rating < 5) {
-								setRating(rating + 1);
-							}
-						}}
-					>
-						<Image
-							source={require('../../../resources/beer-icon.png')}
-							style={styles.image}
-						/>
-					</Pressable>
-					<Pressable
-						style={styles.ratingImage}
-						onPress={() => {
-							if (rating > 1) {
-								setRating(rating - 1);
-							}
-						}}
-					>
-						<Image
-							source={require('../../../resources/beer-icon.png')}
-							style={styles.image}
-						/>
-					</Pressable>
-				</View>
-				<View style={styles.ratingUpOrDown}>
-					<AntDesign
-						name='plus'
-						size={20}
-						color='green'
-						style={styles.ratingPlusOrMinus}
-					/>
+			<View style={styles.container}>
+				<Pressable
+					style={styles.ratingImage}
+					onPress={() => {
+						if (rating > 1) {
+							setRating(rating - 1);
+						}
+					}}
+				>
 					<AntDesign
 						name='minus'
 						size={20}
 						color='red'
 						style={styles.ratingPlusOrMinus}
 					/>
-				</View>
+				</Pressable>
+				<Text>{rating}</Text>
+				<Pressable
+					style={styles.ratingImage}
+					onPress={() => {
+						if (rating < 5) {
+							setRating(rating + 1);
+						}
+					}}
+				>
+					<AntDesign
+						name='plus'
+						size={20}
+						color='green'
+						style={styles.ratingPlusOrMinus}
+					/>
+				</Pressable>
 			</View>
 			<Pressable
 				style={[styles.button, styles.rateButton]}
@@ -78,11 +66,12 @@ const Rating = ({ beer }: { beer: Beer }) => {
 };
 
 const styles = StyleSheet.create({
-	image: {
-		marginTop: 10,
-		marginBottom: 25,
-		width: 25,
-		height: 25,
+	container: {
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'space-evenly',
+		height: 70,
+		marginTop: 20,
 	},
 	button: {
 		borderRadius: 20,
@@ -92,42 +81,15 @@ const styles = StyleSheet.create({
 	textStyle: {
 		color: 'rgba(117, 56, 19, 255)',
 		textAlign: 'center',
-		//		fontFamily: 'Montserrat',  not a system font :(
-	},
-
-	ratingStyle: {
-		display: 'flex',
-		flexDirection: 'column',
-		alignItems: 'center',
-		marginBottom: 40,
-		marginTop: 10,
 	},
 	ratingImage: {
 		margin: 'auto',
 		marginLeft: 10,
 		marginRight: 10,
 	},
-	ratingUpOrDown: {
-		display: 'flex',
-		flexDirection: 'row',
-		marginLeft: 10,
-		marginRight: 10,
-	},
-	beerStyles: {
-		display: 'flex',
-		flexDirection: 'row',
-		marginBottom: -20,
-		paddingBottom: 0,
-	},
 	ratingPlusOrMinus: {
 		marginLeft: 10,
 		marginRight: 10,
-	},
-	ratingNumber: {
-		margin: 20,
-		fontSize: 20,
-		color: 'rgba(117, 56, 19, 255)',
-		alignSelf: 'center',
 	},
 	rateButton: {
 		marginTop: -40,
