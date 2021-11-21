@@ -17,7 +17,7 @@ Dersom du ikke finner QR-koden trykk på "c"-knappen på tastaturet når termina
 
 ### 🔎 Søk
 
-Brukere har mulighet til å søke blant øl ved hjelp av en tekstbox. Her kan man velge å søke blant ølens navn, merke, type eller alle tre samtidig. Søkeboksen bruker en debounce-mekanisme for å automatisk sende requests etter brukeren har skrevet i søkefeltet samtidig som den sikrer at man ikke sender for mange requests til backenden. Kort fortalt blir det sent en request 0.5 sekunder etter at brukeren er ferdig med å skrive.
+Brukere har mulighet til å søke blant øl ved hjelp av en tekstbox. Søkeboksen bruker en debounce-mekanisme for å automatisk sende requests etter brukeren har skrevet i søkefeltet samtidig som den sikrer at man ikke sender for mange requests til backenden. Kort fortalt blir det sent en request 0.5 sekunder etter at brukeren er ferdig med å skrive.
 
 ### 📖 Sideblaing
 
